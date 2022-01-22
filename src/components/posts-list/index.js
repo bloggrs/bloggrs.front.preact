@@ -18,7 +18,7 @@ const PostLikeWrapper = ({ post, callback }) => {
   return <div className='cursor-pointer' onClick={onClickHandler}>{content}</div>
 }
 
-const PostsList = ({ size = 3 }) => {
+const PostsList = ({ title, size = 3 }) => {
 	const [ loading, setLoading ] = useState(true);
 	const [ posts, setPosts ] = useState([]);
 
@@ -51,7 +51,7 @@ const PostsList = ({ size = 3 }) => {
     1: 'border-b-2 my-4 border-b-slate-300 col-span-3 flex',
     2: 'col-span-3 my-8 h-full flex'
   }
-  return (
+  const posts_content = (
     <div className="grid grid-rows-3 grid-flow-col col-span-2 gap-4">
       { loading ? "Loading..." : '' }
       { posts.length ? '' : 'No posts to show'}
@@ -95,6 +95,13 @@ const PostsList = ({ size = 3 }) => {
       }
     </div>
   )
+  if (title) return (
+    <>
+      <h1>{title}</h1>
+      {posts_content}
+    </>
+  )
+  return posts_content
   return (
 		<header class={style.header}>
 			<h1>Preact App</h1>

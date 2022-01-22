@@ -16,7 +16,6 @@ const Home = () => (
 			md:col-start-1
 			md:col-span-1
 			sm:col-span-12
-
 		">
 			<PostsList title="Posts" size={3}/>
 		</div>

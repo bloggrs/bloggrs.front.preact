@@ -66,7 +66,6 @@ const Column = ({ children, options, setOptions }) => {
 				]
 			})
 		}
-		console.log({ x, y });
 	}
 	const leftCustomization = e => {
 		const columnClientRects = columnRef.current.getClientRects()[0];
@@ -103,7 +102,6 @@ const Column = ({ children, options, setOptions }) => {
 				]
 			})
 		}
-		console.log({ x, y });
 	}
 	const left__onMouseOverHandler = e => {
 		window.__bloggrs_internals.events.leftCustomization = true;
@@ -145,9 +143,6 @@ const Column = ({ children, options, setOptions }) => {
 		let x = e.clientX;
 		let y = e.clientY;
 
-		console.table({
-			x, y, clientX: e.clientX, left, colWidth, sum: left + colWidth
-		})
 		if (e.clientX > (left + colWidth)) {
 			window.__bloggrs_internals.mouse = { x: e.clientX, y: e.clientY }
 			setOptions({ 
@@ -172,29 +167,24 @@ const Column = ({ children, options, setOptions }) => {
 	}
 	const drag__onMouseDownHandler = e => {
 		setInternalClasses([ "border-2", "border-dashed", "border-slate-700", "pointer-events-none" ])
-		
 		window.__bloggrs_internals.mouse = { x: e.clientX, y: e.clientY }
-	
 		document.body.addEventListener("mouseup", drag__onMouseUpHandler)
 	 	document.body.addEventListener('mousemove', dragCustomization);
-
 	}
 	const drag__onMouseUpHandler = e => {
 		setInternalClasses([ ])
 		window.__bloggrs_internals.mouse = undefined;
 		document.body.removeEventListener("mouseup", drag__onMouseUpHandler)
 	 	document.body.removeEventListener('mousemove', dragCustomization);
-
 	}
-
 	return (
 		<ColumnDiv 
 			onMouseOver={e => setDisplayButtons(true)}
 			onMouseLeave={e => setDisplayButtons(false)}
 			onMouseDown={drag__onMouseDownHandler}
 			onMouseUp={drag__onMouseUpHandler}
-		
-		ref={columnRef} className={classes}>
+			ref={columnRef} className={classes}
+		>
 			{ displayButtons && <ColumnLeftButton onMouseDown={left__onMouseOverHandler}>{'+'}</ColumnLeftButton> }
 			<div style={{ width: "100%"}}  id="content">{children}</div>
 			{ displayButtons && <ColumnRightButton onMouseDown={right__onMouseOverHandler}>{'+'}</ColumnRightButton> }
@@ -213,12 +203,12 @@ const HomeCustomizable = () => {
 	return (
 		<div class="">
 		  <div class="h-80vh grid gap-8 space-x-1 lg:grid-cols-12 py-10">
-			<Column options={col1_options} setOptions={col1_setOptions}>
-				<PostsList title="Posts" size={3}/>
-			</Column>
-			<Column options={col2_options} setOptions={col2_setOptions}>
-				<CategoriesList/>
-			</Column>
+				<Column options={col1_options} setOptions={col1_setOptions}>
+					<PostsList title="Posts" size={3}/>
+				</Column>
+				<Column options={col2_options} setOptions={col2_setOptions}>
+					<CategoriesList/>
+				</Column>
 		  </div>
 		</div>
 	);
