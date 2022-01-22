@@ -94,7 +94,7 @@ const Header = () => {
             {/* Current: "bg-slate-900 text-white", Default: "text-slate-300  hover:text-slate-900" */}
             {
               pages.map(page => (
-				<Link className='text-slate-600 hover:text-slate-900 px-3 py-2 rounded-md text-base font-medium'  activeClassName={style.active} href={page.slug}>{page.name}</Link>
+				        <Link className='text-slate-600 hover:text-slate-900 px-3 py-2 rounded-md text-base font-medium'  activeClassName={style.active} href={page.slug}>{page.name}</Link>
               ))
             }
           </div>

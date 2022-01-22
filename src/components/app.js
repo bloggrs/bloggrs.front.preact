@@ -7,6 +7,7 @@ import Header from './header';
 import Home from '../routes/home';
 import Profile from '../routes/profile';
 import { useEffect, useState } from 'preact/hooks';
+import HomeCustomizable from '../routes/home-customizable';
 
 window.bloggrs = new window.bloggrs.Bloggrs("fa1dc96f-2136-4c0c-bdbc-95a4f4b7d4fb");;
 Object.defineProperty(String.prototype, 'capitalize', {
@@ -31,6 +32,7 @@ const App = () => {
 			<Header />
 			<Router>
 				<Home context={context} path="/" />
+				<HomeCustomizable context={context} path="/home-customizable" />
 				<Profile path="/profile/" user="me" />
 				<Profile path="/profile/:user" />
 			</Router>

@@ -17,7 +17,7 @@ const CategoriesList = ({ title = "Categories", size = 3, display_posts_count = 
 	},[])
 	if (loading) return <></>;
   return (
-    <div className="mb-14 bg-white shadow-md max-h-1/2 w-3/4 rounded-md justify-center">
+    <div className="mb-14 bg-white shadow-md max-h-1/2 w-full rounded-md justify-center">
         <div className=" mx-6">
           {
             title ?
