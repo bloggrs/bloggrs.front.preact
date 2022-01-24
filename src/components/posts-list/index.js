@@ -66,8 +66,6 @@ const PostsList = ({ title, size = 3 }) => {
                 </h1>
                 <p style={{ minHeight: 30, maxHeight: 71, height: "fit-content" }} className="py-2 text-slate-400 font-normal text-sm">
                   {post.html_content}
-                  {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer */}
-
                 </p>
                 <div style={{  height: "fit-content" }} className="flex">
                   <p className="text-slate-700 font-normal text-sm">
@@ -97,7 +95,7 @@ const PostsList = ({ title, size = 3 }) => {
   )
   if (title) return (
     <>
-      <h1>{title}</h1>
+      <h1 className="ml-4 mb-4 text-slate-700 font-medium text-xl">{title}</h1>
       {posts_content}
     </>
   )

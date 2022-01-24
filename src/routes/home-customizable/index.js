@@ -192,6 +192,14 @@ const Column = ({ children, options, setOptions }) => {
 	)
 }
 
+const Row = ({ children }) => {
+	return (
+		<div className='grid gap-8 grid-flow-row grid-cols-12 py-10'>
+			{children}
+		</div>
+	)
+}
+
 const HomeCustomizable = () => {
 	// const [ _2xl, _set2xl ] = useState([ "2xl:col-start-4", "2xl:col-span-4" ]);
 	const [ col1_options, col1_setOptions ] = useState({ 
@@ -201,16 +209,24 @@ const HomeCustomizable = () => {
 		"2xl": [ "col-start-8", "col-span-3" ]
 	})
 	return (
-		<div class="">
-		  <div class="h-80vh grid gap-8 space-x-1 lg:grid-cols-12 py-10">
-				<Column options={col1_options} setOptions={col1_setOptions}>
-					<PostsList title="Posts" size={3}/>
-				</Column>
-				<Column options={col2_options} setOptions={col2_setOptions}>
-					<CategoriesList/>
-				</Column>
-		  </div>
-		</div>
+		<>
+		  <Row>
+			<Column options={col1_options} setOptions={col1_setOptions}>
+				<PostsList title="Posts" size={3}/>
+			</Column>
+			<Column options={col2_options} setOptions={col2_setOptions}>
+				<CategoriesList/>
+			</Column>	  
+		  </Row>
+		  {/* <Row>
+			<Column options={col1_options} setOptions={col1_setOptions}>
+				<PostsList title="Posts" size={3}/>
+			</Column>
+			<Column options={col2_options} setOptions={col2_setOptions}>
+				<CategoriesList/>
+			</Column>			  
+		  </Row> */}
+		</>
 	);
 }
 
