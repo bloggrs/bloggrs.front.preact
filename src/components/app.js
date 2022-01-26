@@ -6,10 +6,12 @@ import Header from './header';
 // Code-splitting is automated for `routes` directory
 import Home from '../routes/home';
 import Profile from '../routes/profile';
-import { useEffect, useState } from 'preact/hooks';
 import HomeCustomizable from '../routes/home-customizable';
+import { useEffect, useState } from 'preact/hooks';
 
-window.bloggrs = new window.bloggrs.Bloggrs("fa1dc96f-2136-4c0c-bdbc-95a4f4b7d4fb");;
+// window.bloggrs = new window.bloggrs.Bloggrs("fa1dc96f-2136-4c0c-bdbc-95a4f4b7d4fb");;
+window.bloggrs = new window.bloggrs.Bloggrs("2fe78ab2-cab2-469a-a05e-1ee761e3d2b7");;
+
 Object.defineProperty(String.prototype, 'capitalize', {
 	value: function() {
 		return this.charAt(0).toUpperCase() + this.slice(1);
