@@ -1,9 +1,11 @@
 import { h } from 'preact';
-import { useRef, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import CategoriesList from '../../components/categories-list';
 import PostsList from '../../components/posts-list';
 import style from './style.css';
 import styled from 'styled-components';
+import getBreakpointMode from '../../utils/getBreakpointMode';
+import { useBreakpointMode } from '../../hooks/useBreakpointMode';
 
 window.__bloggrs_internals = { events: {} };
 
@@ -26,11 +28,37 @@ const ColumnRightButton = styled.button`
 const Column = ({ children, options, setOptions }) => {
 	const [ internalClasses, setInternalClasses ] = useState([ ]);
 	const columnRef = useRef(null)
-	const [ mode, setMode ] = useState("2xl")
+	const mode = useBreakpointMode();
 	const [ displayButtons, setDisplayButtons ] = useState(false)
 
+	useEffect(() => {
+		const breakpoints = [
+			"default", 'sm', 'md', 'lg', 'xl', '2xl'
+		]
+		let new_options = { ...options } 
+		for (let breakpoint of breakpoints) {
+			const no_options_rule = !options[breakpoint];
+			if (no_options_rule) {
+				new_options = {
+					...new_options,
+					[breakpoint]: [ 
+						"col-start-", 
+						"col-span-"
+					]
+				}
+			}
+		}
+		setOptions(new_options)
+	}, [])
+	const normalize_col_num = col_num => {
+		col_num = Number(col_num);
+		if (col_num < 1) return 1;
+		if (col_num > 12) return 12;
+		return col_num
+	}
 	let classes = Object.keys(options).map(key => {
 		let values = options[key];
+		if (key === "default") return values.map(val => `${val}`)
 		return values.map(val => `${key}:${val}`)
 	}).concat(internalClasses).flat().join(" ")
 	if (displayButtons) classes += " cursor-grab"
@@ -54,7 +82,7 @@ const Column = ({ children, options, setOptions }) => {
 			setOptions({ 
 				...options, 
 				[mode]: [ 
-					options[mode][0], "col-span-" + (Number(colSpanClass.split("-")[2]) + 1) 
+					options[mode][0], "col-span-" + normalize_col_num(Number(colSpanClass.split("-")[2]) + 1) 
 				]
 			})
 		}
@@ -62,7 +90,7 @@ const Column = ({ children, options, setOptions }) => {
 			setOptions({ 
 				...options, 
 				[mode]: [ 
-					options[mode][0], "col-span-" + (Number(colSpanClass.split("-")[2]) - 1) 
+					options[mode][0], "col-span-" + normalize_col_num(Number(colSpanClass.split("-")[2]) - 1) 
 				]
 			})
 		}
@@ -88,8 +116,8 @@ const Column = ({ children, options, setOptions }) => {
 			setOptions({ 
 				...options, 
 				[mode]: [ 
-					"col-start-" + (Number(colStartClass.split("-")[2]) + 1),
-					"col-span-" + (Number(colSpanClass.split("-")[2]) - 1) 
+					"col-start-" + normalize_col_num(Number(colStartClass.split("-")[2]) + 1),
+					"col-span-" + normalize_col_num(Number(colSpanClass.split("-")[2]) - 1) 
 				]
 			})
 		}
@@ -97,8 +125,8 @@ const Column = ({ children, options, setOptions }) => {
 			setOptions({ 
 				...options, 
 				[mode]: [ 
-					"col-start-" + (Number(colStartClass.split("-")[2]) - 1),
-					"col-span-" + (Number(colSpanClass.split("-")[2]) + 1) 
+					"col-start-" + normalize_col_num(Number(colStartClass.split("-")[2]) - 1),
+					"col-span-" + normalize_col_num(Number(colSpanClass.split("-")[2]) + 1) 
 				]
 			})
 		}
@@ -148,7 +176,7 @@ const Column = ({ children, options, setOptions }) => {
 			setOptions({ 
 				...options, 
 				[mode]: [ 
-					"col-start-" + (Number(colStartClass.split("-")[2]) + 1),
+					"col-start-" + normalize_col_num(Number(colStartClass.split("-")[2]) + 1),
 					options[mode][1], 
 				]
 			})
@@ -159,7 +187,7 @@ const Column = ({ children, options, setOptions }) => {
 			setOptions({ 
 				...options, 
 				[mode]: [ 
-					"col-start-" + (Number(colStartClass.split("-")[2]) - 1),
+					"col-start-" + normalize_col_num(Number(colStartClass.split("-")[2]) - 1),
 					options[mode][1], 
 				]
 			})
@@ -203,10 +231,10 @@ const Row = ({ children }) => {
 const HomeCustomizable = () => {
 	// const [ _2xl, _set2xl ] = useState([ "2xl:col-start-4", "2xl:col-span-4" ]);
 	const [ col1_options, col1_setOptions ] = useState({ 
-		"2xl": [ "col-start-4", "col-span-4" ]
+		"2xl": [ "col-start-4", "col-span-4" ],
 	})
 	const [ col2_options, col2_setOptions ] = useState({ 
-		"2xl": [ "col-start-8", "col-span-3" ]
+		"2xl": [ "col-start-8", "col-span-3" ],
 	})
 	return (
 		<>

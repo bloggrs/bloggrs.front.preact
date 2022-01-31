@@ -10,7 +10,7 @@ import HomeCustomizable from '../routes/home-customizable';
 import { useEffect, useState } from 'preact/hooks';
 
 // window.bloggrs = new window.bloggrs.Bloggrs("fa1dc96f-2136-4c0c-bdbc-95a4f4b7d4fb");;
-window.bloggrs = new window.bloggrs.Bloggrs("2fe78ab2-cab2-469a-a05e-1ee761e3d2b7");;
+window.bloggrs = new window.bloggrs.Bloggrs("42fe1d47-e993-4d47-92ee-340552c1c243");;
 
 Object.defineProperty(String.prototype, 'capitalize', {
 	value: function() {
