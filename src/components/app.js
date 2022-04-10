@@ -9,7 +9,9 @@ import Profile from '../routes/profile';
 import { useEffect, useState } from 'preact/hooks';
 import HomeCustomizable from '../routes/home-customizable';
 
-window.bloggrs = new window.bloggrs.Bloggrs("fa1dc96f-2136-4c0c-bdbc-95a4f4b7d4fb");;
+// window.bloggrs = new window.bloggrs.Bloggrs("fa1dc96f-2136-4c0c-bdbc-95a4f4b7d4fb");;
+window.bloggrs = new window.bloggrs.Bloggrs("d4d12fc1-7529-4b70-ad41-16d68b96834d");;
+
 Object.defineProperty(String.prototype, 'capitalize', {
 	value: function() {
 		return this.charAt(0).toUpperCase() + this.slice(1);

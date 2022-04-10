@@ -34,6 +34,9 @@ const CategoriesList = ({ title = "Categories", size = 3, display_posts_count = 
                   <li>{ctg.name} {display_posts_count ? `(${ctg.meta.posts_count})` : '' }</li>
                 ))
               }
+              {!loading &&
+                !categories.length && <p>No categories to show</p>
+              }
             </ul>
         </div>
     </div>
